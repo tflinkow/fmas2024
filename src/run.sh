@@ -1,0 +1,2 @@
+python main.py --data-set=lego --batch-size=16 --lr=0.001 --epochs=25 --pgd-steps=50 --constraint="Robustness(eps=0.08, delta=0.05)"
+python main.py --data-set=lego --batch-size=16 --lr=0.001 --epochs=25 --pgd-steps=50 --constraint="Robustness(eps=0.08, delta=0.05)" --logic=GD

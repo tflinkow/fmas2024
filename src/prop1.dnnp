@@ -1,0 +1,21 @@
+from dnnv.properties import *
+import numpy as np
+
+N = Network("N")
+x = Image(__path__.parent / "data_np/image_0.npy")
+
+epsilon = Parameter("epsilon", float, default=(48. / 255))
+delta = Parameter("delta", float, default=0.1)
+
+mean = 0.45238086581230164
+std = 0.1576065719127655
+
+denormalize = lambda x: x * std + mean
+
+Forall(
+    x_,
+    Implies(
+        ((x - epsilon) <= denormalize(x_) <= (x + epsilon)),
+        (abs(N(x_)[0][0] - N(x)[0][0]) <= delta) & (abs(N(x_)[0][1] - N(x)[0][1]) <= delta)
+    ),
+)
